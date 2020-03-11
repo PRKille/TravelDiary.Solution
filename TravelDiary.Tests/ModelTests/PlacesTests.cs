@@ -16,7 +16,7 @@ namespace TravelDiary.Tests
     [TestMethod]
     public void PlaceConstructor_CreatesInstanceOfPlace_Place()
     {
-      Place newPlace = new Place("test");
+      Place newPlace = new Place("test", "test");
       Assert.AreEqual(typeof(Place), newPlace.GetType());
     }
 
@@ -27,7 +27,7 @@ namespace TravelDiary.Tests
       string cityName = "Istanbul";
 
       // Act
-      Place newPlace = new Place(cityName);
+      Place newPlace = new Place(cityName, "test");
       string result = newPlace.CityName;
 
       // Assert
@@ -53,8 +53,8 @@ namespace TravelDiary.Tests
       // Arrange
       string cityName1 = "Istanbul";
       string cityName2 = "Berlin";
-      Place newPlace1 = new Place(cityName1);
-      Place newPlace2 = new Place(cityName2);
+      Place newPlace1 = new Place(cityName1, "test");
+      Place newPlace2 = new Place(cityName2, "test");
       List<Place> allPlaces = new List<Place> { newPlace1, newPlace2 };
 
       // Act
@@ -69,7 +69,7 @@ namespace TravelDiary.Tests
     {
       // Arrange
       string cityName = "Vienna";
-      Place newPlace = new Place(cityName);
+      Place newPlace = new Place(cityName, "test");
 
       // Act
       int result = newPlace.Id;
@@ -84,14 +84,30 @@ namespace TravelDiary.Tests
       // Arrange
       string cityName1 = "Istanbul";
       string cityName2 = "Berlin";
-      Place newPlace1 = new Place(cityName1);
-      Place newPlace2 = new Place(cityName2);
+      Place newPlace1 = new Place(cityName1, "test");
+      Place newPlace2 = new Place(cityName2, "test");
 
       // Act
       Place result = Place.Find(2);
 
       // Assert
       Assert.AreEqual(newPlace2, result);
+    }
+
+    [TestMethod]
+    public void GetDescription_ReturnDescription_String()
+    {
+      //Arrange
+      string cityName = "Vienna";
+      string description = "This is a test";
+      Place newPlace = new Place(cityName, description);
+
+      //Act
+      string result = newPlace.Description;
+
+      //Assert
+      Assert.AreEqual(description, result);
+
     }
   }
 }
