@@ -123,5 +123,22 @@ namespace TravelDiary.Tests
       //Assert
       Assert.AreEqual(travelPartner, result);
     }
+
+    [TestMethod]
+    public void OverloadedPlaceConstructor_CreateInstanceOfPlace_Place()
+    {
+      //Arrange
+      string cityName = "Vienna";
+      string description = "fun!";
+      string travelPartner = "Michelle";
+      string imageURL = "https://picsum.photos/200";
+      Place newPlace = new Place(cityName, description, travelPartner, imageURL);
+
+      //Act
+      string result = newPlace.TravelPartner;
+
+      //Assert
+      Assert.AreEqual(travelPartner, result);
+    }
   }
 }
