@@ -47,5 +47,19 @@ namespace TravelDiary.Controllers
       Place foundPlace = Place.Find(id);
       return View(foundPlace);
     }
+
+    [HttpPost("/places/{id}")]
+    public ActionResult Update(string cityName, string description, string travelPartner, string imageURL)
+    {
+      if (String.IsNullOrWhiteSpace(imageURL))
+      {
+        Place newPlace = new Place(cityName, description, travelPartner);
+      }
+      else
+      {
+        Place newPlace = new Place(cityName, description, travelPartner, imageURL);
+      }
+      return RedirectToAction("Index");
+    }
   }
 }
