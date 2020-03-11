@@ -77,5 +77,21 @@ namespace TravelDiary.Tests
       // Assert
       Assert.AreEqual(1, result);
     }
+
+    [TestMethod]
+    public void Find_ReturnsCorrectPlace_Place()
+    {
+      // Arrange
+      string cityName1 = "Istanbul";
+      string cityName2 = "Berlin";
+      Place newPlace1 = new Place(cityName1);
+      Place newPlace2 = new Place(cityName2);
+
+      // Act
+      Place result = Place.Find(2);
+
+      // Assert
+      Assert.AreEqual(newPlace2, result);
+    }
   }
 }
