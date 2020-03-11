@@ -63,5 +63,19 @@ namespace TravelDiary.Tests
       // Assert
       CollectionAssert.AreEqual(allPlaces, result);
     }
+
+    [TestMethod]
+    public void GetId_PlacesInstantiateWithAnIdAndGetterReturns_Int()
+    {
+      // Arrange
+      string cityName = "Vienna";
+      Place newPlace = new Place(cityName);
+
+      // Act
+      int result = newPlace.Id;
+
+      // Assert
+      Assert.AreEqual(1, result);
+    }
   }
 }
