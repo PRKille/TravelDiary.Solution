@@ -6,7 +6,7 @@ namespace TravelDiary.Models
 
     public Place(string cityName)
     {
-      CityName = "nothing";
+      CityName = cityName;
     }
   }
 }
