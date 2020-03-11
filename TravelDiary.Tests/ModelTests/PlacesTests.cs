@@ -46,5 +46,22 @@ namespace TravelDiary.Tests
       // Assert
       CollectionAssert.AreEqual(newPlaces, result);
     }
+
+    [TestMethod]
+    public void GetAll_ReturnsPlaces_PlaceList()
+    {
+      // Arrange
+      string cityName1 = "Istanbul";
+      string cityName2 = "Berlin";
+      Place newPlace1 = new Place(cityName1);
+      Place newPlace2 = new Place(cityName2);
+      List<Place> allPlaces = new List<Place> { newPlace1, newPlace2 };
+
+      // Act
+      List<Place> result = Place.GetAll();
+
+      // Assert
+      CollectionAssert.AreEqual(allPlaces, result);
+    }
   }
 }
