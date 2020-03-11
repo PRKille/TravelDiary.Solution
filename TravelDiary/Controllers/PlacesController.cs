@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using TravelDiary.Models;
 using System.Collections.Generic;
+using System;
 
 namespace TravelDiary.Controllers
 {
@@ -20,9 +21,16 @@ namespace TravelDiary.Controllers
     }
 
     [HttpPost("/places")]
-    public ActionResult Create(string cityName, string description, string travelPartner)
+    public ActionResult Create(string cityName, string description, string travelPartner, string imageURL)
     {
-      Place newPlace = new Place(cityName, description, travelPartner);
+      if (String.IsNullOrWhiteSpace(imageURL))
+      {
+        Place newPlace = new Place(cityName, description, travelPartner);
+      }
+      else
+      {
+        Place newPlace = new Place(cityName, description, travelPartner, imageURL);
+      }
       return RedirectToAction("Index");
     }
 

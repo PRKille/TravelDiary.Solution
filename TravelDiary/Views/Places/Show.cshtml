@@ -1,4 +1,12 @@
 <h1>Travel Diary City Details</h1>
 <h2>@Model.CityName</h2>
+<ul>
+  <li>Traveled with: @Model.TravelPartner</li>
+  <li>Description: @Model.Description</li>
+  @if (@Model.ImageURL != null)
+  {
+    <li><img src=@Model.ImageURL alt="a photo from the trip"></li>
+  }
+</ul>
 <a href="/places/new">Add another place!</a>
 <a href="/places">View all the places you've been!</a>
