@@ -12,5 +12,25 @@ namespace TravelDiary.Controllers
       List<Place> allPlaces = Place.GetAll();
       return View(allPlaces);
     }
+
+    [HttpGet("/places/new")]
+    public ActionResult New()
+    {
+      return View();
+    }
+
+    [HttpPost("/places")]
+    public ActionResult Create(string cityName)
+    {
+      Place newPlace = new Place(cityName);
+      return RedirectToAction("Index");
+    }
+
+    [HttpPost("/places/delete")]
+    public ActionResult DeleteAll()
+    {
+      Place.ClearAll();
+      return RedirectToAction("Index");
+    }
   }
 }
