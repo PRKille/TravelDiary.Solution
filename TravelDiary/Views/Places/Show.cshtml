@@ -8,5 +8,10 @@
     <li><img src=@Model.ImageURL alt="a photo from the trip"></li>
   }
 </ul>
+
+<form action="/places/@Model.Id/edit" method="post">
+  <button type="submit">Edit these details</button>
+</form>
+
 <a href="/places/new">Add another place!</a>
 <a href="/places">View all the places you've been!</a>

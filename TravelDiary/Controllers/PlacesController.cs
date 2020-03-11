@@ -48,18 +48,32 @@ namespace TravelDiary.Controllers
       return View(foundPlace);
     }
 
-    [HttpPost("/places/{id}")]
-    public ActionResult Update(string cityName, string description, string travelPartner, string imageURL)
+    [HttpPost("/places/{id}/edit")]
+    public ActionResult Edit(int id)
     {
+      Place foundPlace = Place.Find(id);
+      return View(foundPlace);
+    }
+
+    [HttpPost("/places/{id}")]
+    public ActionResult Update(string cityName, string description, string travelPartner, string imageURL, int id)
+    {
+      Place foundPlace = Place.Find(id);
       if (String.IsNullOrWhiteSpace(imageURL))
       {
-        Place newPlace = new Place(cityName, description, travelPartner);
+        foundPlace.CityName = cityName;
+        foundPlace.Description = description;
+        foundPlace.TravelPartner = travelPartner;
       }
       else
       {
-        Place newPlace = new Place(cityName, description, travelPartner, imageURL);
+        foundPlace.CityName = cityName;
+        foundPlace.Description = description;
+        foundPlace.TravelPartner = travelPartner;
+        foundPlace.ImageURL = imageURL;
       }
       return RedirectToAction("Index");
     }
+
   }
 }

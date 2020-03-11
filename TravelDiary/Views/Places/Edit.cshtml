@@ -1,0 +1,11 @@
+<form action=/places/@Model.Id method="post">
+  <label for="cityName">Enter the city name:</label>
+  <input id="cityName" name="cityName" type="text" value=@Model.CityName required>
+  <label for="description">Enter a description of this trip:</label>
+  <input id="description" name="description" type="text" value=@Model.Description required>
+  <label for="travelpartner">Who did you travel with? (If this was solo travel, enter none!)</label>
+  <input id="travelpartner" name="travelpartner" type="text" value=@Model.TravelPartner required>
+  <label for="imageURL">Enter a URL for a photo from the trip:</label>
+  <input id="imageURL" name="imageURL" value=@Model.ImageURL type="text">
+  <button type="submit">Update with these details!</button>
+</form>
