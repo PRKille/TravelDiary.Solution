@@ -6,8 +6,13 @@ using System;
 namespace TravelDiary.Tests
 {
   [TestClass]
-  public class PlaceTest
+  public class PlaceTest : IDisposable
   {
+    public void Dispose()
+    {
+      Place.ClearAll();
+    }
+
     [TestMethod]
     public void PlaceConstructor_CreatesInstanceOfPlace_Place()
     {
@@ -27,6 +32,19 @@ namespace TravelDiary.Tests
 
       // Assert
       Assert.AreEqual(cityName, result);
+    }
+
+    [TestMethod]
+    public void GetAll_ReturnsEmptyList_PlaceList()
+    {
+      // Arrange
+      List<Place> newPlaces = new List<Place> {};
+
+      // Act
+      List<Place> result = Place.GetAll();
+
+      // Assert
+      CollectionAssert.AreEqual(newPlaces, result);
     }
   }
 }
