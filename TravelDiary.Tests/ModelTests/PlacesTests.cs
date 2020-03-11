@@ -16,7 +16,7 @@ namespace TravelDiary.Tests
     [TestMethod]
     public void PlaceConstructor_CreatesInstanceOfPlace_Place()
     {
-      Place newPlace = new Place("test", "test", "test");
+      Place newPlace = new Place("test", "test", "test", "test");
       Assert.AreEqual(typeof(Place), newPlace.GetType());
     }
 
@@ -27,7 +27,7 @@ namespace TravelDiary.Tests
       string cityName = "Istanbul";
 
       // Act
-      Place newPlace = new Place(cityName, "test", "test");
+      Place newPlace = new Place(cityName, "test", "test", "test");
       string result = newPlace.CityName;
 
       // Assert
@@ -53,8 +53,8 @@ namespace TravelDiary.Tests
       // Arrange
       string cityName1 = "Istanbul";
       string cityName2 = "Berlin";
-      Place newPlace1 = new Place(cityName1, "test", "test");
-      Place newPlace2 = new Place(cityName2, "test", "test");
+      Place newPlace1 = new Place(cityName1, "test", "test", "test");
+      Place newPlace2 = new Place(cityName2, "test", "test", "test");
       List<Place> allPlaces = new List<Place> { newPlace1, newPlace2 };
 
       // Act
@@ -69,7 +69,7 @@ namespace TravelDiary.Tests
     {
       // Arrange
       string cityName = "Vienna";
-      Place newPlace = new Place(cityName, "test", "test");
+      Place newPlace = new Place(cityName, "test", "test", "test");
 
       // Act
       int result = newPlace.Id;
@@ -84,8 +84,8 @@ namespace TravelDiary.Tests
       // Arrange
       string cityName1 = "Istanbul";
       string cityName2 = "Berlin";
-      Place newPlace1 = new Place(cityName1, "test", "test");
-      Place newPlace2 = new Place(cityName2, "test", "test");
+      Place newPlace1 = new Place(cityName1, "test", "test", "test");
+      Place newPlace2 = new Place(cityName2, "test", "test", "test");
 
       // Act
       Place result = Place.Find(2);
@@ -100,7 +100,7 @@ namespace TravelDiary.Tests
       //Arrange
       string cityName = "Vienna";
       string description = "This is a test";
-      Place newPlace = new Place(cityName, description, "test");
+      Place newPlace = new Place(cityName, "test", description, "test");
 
       //Act
       string result = newPlace.Description;
@@ -115,7 +115,7 @@ namespace TravelDiary.Tests
       //Arrange
       string cityName = "Vienna";
       string travelPartner = "Michelle";
-      Place newPlace = new Place(cityName, "test", travelPartner);
+      Place newPlace = new Place(cityName, "test", "test", travelPartner);
 
       //Act
       string result = newPlace.TravelPartner;
@@ -132,7 +132,7 @@ namespace TravelDiary.Tests
       string description = "fun!";
       string travelPartner = "Michelle";
       string imageURL = "https://picsum.photos/200";
-      Place newPlace = new Place(cityName, description, travelPartner, imageURL);
+      Place newPlace = new Place(cityName, "test", description, travelPartner, imageURL);
 
       //Act
       string result = newPlace.TravelPartner;
