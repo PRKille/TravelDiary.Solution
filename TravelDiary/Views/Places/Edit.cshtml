@@ -1,10 +1,8 @@
 <form action=/places/@Model.Id method="post">
   <label for="cityName">Enter the city name:</label>
   <input id="cityName" name="cityName" type="text" value=@Model.CityName required>
-  <label for="startDate">When did the trip begin?:</label>
-  <input id="startDate" name="startDate" type="date" value=@Model.StartDate required>
-  <label for="endDate">When did the trip end?</label>
-  <input id="endDate" name="endDate" type="date" value=@Model.EndDate required>
+  <label for="duration">When was the trip?</label>
+  <input id="duration" name="duration" type="text" value=@Model.Duration required>
   <label for="description">Enter a description of this trip:</label>
   <input id="description" name="description" type="text" value=@Model.Description required>
   <label for="travelpartner">Who did you travel with? (If this was solo travel, enter none!)</label>

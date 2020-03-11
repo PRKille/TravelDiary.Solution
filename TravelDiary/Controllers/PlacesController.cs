@@ -21,15 +21,15 @@ namespace TravelDiary.Controllers
     }
 
     [HttpPost("/places")]
-    public ActionResult Create(string cityName, string startDate, string endDate, string description, string travelPartner, string imageURL)
+    public ActionResult Create(string cityName, string duration, string description, string travelPartner, string imageURL)
     {
       if (String.IsNullOrWhiteSpace(imageURL))
       {
-        Place newPlace = new Place(cityName, startDate, endDate, description, travelPartner);
+        Place newPlace = new Place(cityName, duration, description, travelPartner);
       }
       else
       {
-        Place newPlace = new Place(cityName, startDate, endDate, description, travelPartner, imageURL);
+        Place newPlace = new Place(cityName, duration, description, travelPartner, imageURL);
       }
       return RedirectToAction("Index");
     }
@@ -56,22 +56,20 @@ namespace TravelDiary.Controllers
     }
 
     [HttpPost("/places/{id}")]
-    public ActionResult Update(string cityName, string startDate, string endDate, string description, string travelPartner, string imageURL, int id)
+    public ActionResult Update(string cityName, string duration, string description, string travelPartner, string imageURL, int id)
     {
       Place foundPlace = Place.Find(id);
       if (String.IsNullOrWhiteSpace(imageURL))
       {
         foundPlace.CityName = cityName;
-        foundPlace.StartDate = startDate;
-        foundPlace.EndDate = endDate;
+        foundPlace.Duration = duration;
         foundPlace.Description = description;
         foundPlace.TravelPartner = travelPartner;
       }
       else
       {
         foundPlace.CityName = cityName;
-        foundPlace.StartDate = startDate;
-        foundPlace.EndDate = endDate;
+        foundPlace.Duration = duration;
         foundPlace.Description = description;
         foundPlace.TravelPartner = travelPartner;
         foundPlace.ImageURL = imageURL;
