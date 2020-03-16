@@ -1,16 +1,16 @@
 using System.Collections.Generic;
+using MySql.Data.MySqlClient;
 
 namespace TravelDiary.Models
 {
   public class Place
   {
-    public string CityName { get; set; }
+    public string CityName { get; set; } 
     public string Duration { get; set; }
     public string Description { get; set; }
     public string TravelPartner { get; set; }
     public string ImageURL { get; set; }
     public int Id { get; }
-    private static List<Place> _allPlaces { get; } = new List<Place> {};
 
     public Place(string cityName, string duration, string description, string travelPartner)
     {
@@ -18,8 +18,6 @@ namespace TravelDiary.Models
       Duration = duration;
       Description = description;
       TravelPartner = travelPartner;
-      _allPlaces.Add(this);
-      Id = _allPlaces.Count;
     }
 
     public Place(string cityName, string duration, string description, string travelPartner, string imageURL)
@@ -30,17 +28,37 @@ namespace TravelDiary.Models
 
     public static List<Place> GetAll()
     {
-      return _allPlaces;
+      List<Place> allPlaces = new List<Place> {};
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"SELECT * FROM places;";
+      MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
+      while (rdr.Read())
+      {
+        int placeID = rdr.GetInt32(4);
+        string cityName = rdr.GetString(0);
+        string duration = rdr.GetString(1);
+        string description = rdr.GetString(2);
+        string travelPartner = rdr.GetString(3);
+        Place newPlace = new Place(cityName, duration, description, travelPartner);
+        allPlaces.Add(newPlace);
+      }
+      conn.Close();
+      if (conn != null)
+      {
+        conn.Dispose();
+      }
+      return allPlaces;
     }
 
     public static void ClearAll()
     {
-      _allPlaces.Clear();
     }
 
     public static Place Find(int searchId)
     {
-      return _allPlaces[searchId - 1];
+      return allPlaces[searchId - 1];
     }
   }
 }
