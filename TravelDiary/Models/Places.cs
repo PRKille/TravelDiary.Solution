@@ -75,7 +75,7 @@ namespace TravelDiary.Models
 
     public static Place Find(int searchId)
     {
-      Place placeholderPlace = new Place("placeholder place");
+      Place placeholderPlace = new Place("cityName", "1 month", "something", "geoff's mom");
       return placeholderPlace;
     }
   }
