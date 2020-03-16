@@ -2,6 +2,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using TravelDiary.Models;
 using System;
+using MySql.Data.MySqlClient;
 
 namespace TravelDiary.Tests
 {
@@ -13,132 +14,143 @@ namespace TravelDiary.Tests
       Place.ClearAll();
     }
 
-    [TestMethod]
-    public void PlaceConstructor_CreatesInstanceOfPlace_Place()
+    public PlaceTest()
     {
-      Place newPlace = new Place("test", "test", "test", "test");
-      Assert.AreEqual(typeof(Place), newPlace.GetType());
+      DBConfiguration.ConnectionString = "server=localhost;user id=root;password=epicodus;port=3306;database=travel_diary_test;";
     }
 
     [TestMethod]
-    public void GetCityName_ReturnsCityName_String()
+    public void GetAll_ReturnsEmptyListFromDatabase_PlaceList()
     {
-      // Arrange
-      string cityName = "Istanbul";
-
-      // Act
-      Place newPlace = new Place(cityName, "test", "test", "test");
-      string result = newPlace.CityName;
-
-      // Assert
-      Assert.AreEqual(cityName, result);
+      List
     }
 
-    [TestMethod]
-    public void GetAll_ReturnsEmptyList_PlaceList()
-    {
-      // Arrange
-      List<Place> newPlaces = new List<Place> {};
+    // [TestMethod]
+    // public void PlaceConstructor_CreatesInstanceOfPlace_Place()
+    // {
+    //   Place newPlace = new Place("test", "test", "test", "test");
+    //   Assert.AreEqual(typeof(Place), newPlace.GetType());
+    // }
 
-      // Act
-      List<Place> result = Place.GetAll();
+    // [TestMethod]
+    // public void GetCityName_ReturnsCityName_String()
+    // {
+    //   // Arrange
+    //   string cityName = "Istanbul";
 
-      // Assert
-      CollectionAssert.AreEqual(newPlaces, result);
-    }
+    //   // Act
+    //   Place newPlace = new Place(cityName, "test", "test", "test");
+    //   string result = newPlace.CityName;
 
-    [TestMethod]
-    public void GetAll_ReturnsPlaces_PlaceList()
-    {
-      // Arrange
-      string cityName1 = "Istanbul";
-      string cityName2 = "Berlin";
-      Place newPlace1 = new Place(cityName1, "test", "test", "test");
-      Place newPlace2 = new Place(cityName2, "test", "test", "test");
-      List<Place> allPlaces = new List<Place> { newPlace1, newPlace2 };
+    //   // Assert
+    //   Assert.AreEqual(cityName, result);
+    // }
 
-      // Act
-      List<Place> result = Place.GetAll();
+    // [TestMethod]
+    // public void GetAll_ReturnsEmptyList_PlaceList()
+    // {
+    //   // Arrange
+    //   List<Place> newPlaces = new List<Place> {};
 
-      // Assert
-      CollectionAssert.AreEqual(allPlaces, result);
-    }
+    //   // Act
+    //   List<Place> result = Place.GetAll();
 
-    [TestMethod]
-    public void GetId_PlacesInstantiateWithAnIdAndGetterReturns_Int()
-    {
-      // Arrange
-      string cityName = "Vienna";
-      Place newPlace = new Place(cityName, "test", "test", "test");
+    //   // Assert
+    //   CollectionAssert.AreEqual(newPlaces, result);
+    // }
 
-      // Act
-      int result = newPlace.Id;
+    // [TestMethod]
+    // public void GetAll_ReturnsPlaces_PlaceList()
+    // {
+    //   // Arrange
+    //   string cityName1 = "Istanbul";
+    //   string cityName2 = "Berlin";
+    //   Place newPlace1 = new Place(cityName1, "test", "test", "test");
+    //   Place newPlace2 = new Place(cityName2, "test", "test", "test");
+    //   List<Place> allPlaces = new List<Place> { newPlace1, newPlace2 };
 
-      // Assert
-      Assert.AreEqual(1, result);
-    }
+    //   // Act
+    //   List<Place> result = Place.GetAll();
 
-    [TestMethod]
-    public void Find_ReturnsCorrectPlace_Place()
-    {
-      // Arrange
-      string cityName1 = "Istanbul";
-      string cityName2 = "Berlin";
-      Place newPlace1 = new Place(cityName1, "test", "test", "test");
-      Place newPlace2 = new Place(cityName2, "test", "test", "test");
+    //   // Assert
+    //   CollectionAssert.AreEqual(allPlaces, result);
+    // }
 
-      // Act
-      Place result = Place.Find(2);
+    // [TestMethod]
+    // public void GetId_PlacesInstantiateWithAnIdAndGetterReturns_Int()
+    // {
+    //   // Arrange
+    //   string cityName = "Vienna";
+    //   Place newPlace = new Place(cityName, "test", "test", "test");
 
-      // Assert
-      Assert.AreEqual(newPlace2, result);
-    }
+    //   // Act
+    //   int result = newPlace.Id;
 
-    [TestMethod]
-    public void GetDescription_ReturnDescription_String()
-    {
-      //Arrange
-      string cityName = "Vienna";
-      string description = "This is a test";
-      Place newPlace = new Place(cityName, "test", description, "test");
+    //   // Assert
+    //   Assert.AreEqual(1, result);
+    // }
 
-      //Act
-      string result = newPlace.Description;
+    // [TestMethod]
+    // public void Find_ReturnsCorrectPlace_Place()
+    // {
+    //   // Arrange
+    //   string cityName1 = "Istanbul";
+    //   string cityName2 = "Berlin";
+    //   Place newPlace1 = new Place(cityName1, "test", "test", "test");
+    //   Place newPlace2 = new Place(cityName2, "test", "test", "test");
 
-      //Assert
-      Assert.AreEqual(description, result);
-    }
+    //   // Act
+    //   Place result = Place.Find(2);
 
-    [TestMethod]
-    public void GetTravelPartner_ReturnTravelPartner_String()
-    {
-      //Arrange
-      string cityName = "Vienna";
-      string travelPartner = "Michelle";
-      Place newPlace = new Place(cityName, "test", "test", travelPartner);
+    //   // Assert
+    //   Assert.AreEqual(newPlace2, result);
+    // }
 
-      //Act
-      string result = newPlace.TravelPartner;
+    // [TestMethod]
+    // public void GetDescription_ReturnDescription_String()
+    // {
+    //   //Arrange
+    //   string cityName = "Vienna";
+    //   string description = "This is a test";
+    //   Place newPlace = new Place(cityName, "test", description, "test");
 
-      //Assert
-      Assert.AreEqual(travelPartner, result);
-    }
+    //   //Act
+    //   string result = newPlace.Description;
 
-    [TestMethod]
-    public void OverloadedPlaceConstructor_CreateInstanceOfPlace_Place()
-    {
-      //Arrange
-      string cityName = "Vienna";
-      string description = "fun!";
-      string travelPartner = "Michelle";
-      string imageURL = "https://picsum.photos/200";
-      Place newPlace = new Place(cityName, "test", description, travelPartner, imageURL);
+    //   //Assert
+    //   Assert.AreEqual(description, result);
+    // }
 
-      //Act
-      string result = newPlace.TravelPartner;
+    // [TestMethod]
+    // public void GetTravelPartner_ReturnTravelPartner_String()
+    // {
+    //   //Arrange
+    //   string cityName = "Vienna";
+    //   string travelPartner = "Michelle";
+    //   Place newPlace = new Place(cityName, "test", "test", travelPartner);
 
-      //Assert
-      Assert.AreEqual(travelPartner, result);
-    }
+    //   //Act
+    //   string result = newPlace.TravelPartner;
+
+    //   //Assert
+    //   Assert.AreEqual(travelPartner, result);
+    // }
+
+    // [TestMethod]
+    // public void OverloadedPlaceConstructor_CreateInstanceOfPlace_Place()
+    // {
+    //   //Arrange
+    //   string cityName = "Vienna";
+    //   string description = "fun!";
+    //   string travelPartner = "Michelle";
+    //   string imageURL = "https://picsum.photos/200";
+    //   Place newPlace = new Place(cityName, "test", description, travelPartner, imageURL);
+
+    //   //Act
+    //   string result = newPlace.TravelPartner;
+
+    //   //Assert
+    //   Assert.AreEqual(travelPartner, result);
+    // }
   }
 }
