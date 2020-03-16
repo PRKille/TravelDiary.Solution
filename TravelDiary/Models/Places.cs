@@ -20,8 +20,14 @@ namespace TravelDiary.Models
       TravelPartner = travelPartner;
     }
 
-    public Place(string cityName, string duration, string description, string travelPartner, string imageURL)
+    public Place(string cityName, string duration, string description, string travelPartner, int id)
       : this(cityName, duration, description, travelPartner)
+    {
+      Id = id;
+    }
+
+    public Place(string cityName, string duration, string description, string travelPartner, int id, string imageURL)
+      : this(cityName, duration, description, travelPartner, id)
     {
       ImageURL = imageURL;
     }
@@ -41,7 +47,7 @@ namespace TravelDiary.Models
         string duration = rdr.GetString(1);
         string description = rdr.GetString(2);
         string travelPartner = rdr.GetString(3);
-        Place newPlace = new Place(cityName, duration, description, travelPartner);
+        Place newPlace = new Place(cityName, duration, description, travelPartner, placeID);
         allPlaces.Add(newPlace);
       }
       conn.Close();
@@ -54,11 +60,23 @@ namespace TravelDiary.Models
 
     public static void ClearAll()
     {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"DELETE FROM items;";
+      cmd.ExecuteNonQuery();
+      conn.Close();
+      if (conn != null)
+      {
+        conn.Dispose();
+      }
+      
     }
 
     public static Place Find(int searchId)
     {
-      return allPlaces[searchId - 1];
+      Place placeholderPlace = new Place("placeholder place");
+      return placeholderPlace;
     }
   }
 }
