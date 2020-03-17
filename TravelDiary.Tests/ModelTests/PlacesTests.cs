@@ -22,7 +22,7 @@ namespace TravelDiary.Tests
     [TestMethod]
     public void GetAll_ReturnsEmptyListFromDatabase_PlaceList()
     {
-      List<Place> newPlace = new List<Place> {};
+      List<Place> newPlace = new List<Place>{};
       List<Place> result = Place.GetAll();
       CollectionAssert.AreEqual(newPlace, result);
     }

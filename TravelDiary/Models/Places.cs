@@ -63,7 +63,7 @@ namespace TravelDiary.Models
       MySqlConnection conn = DB.Connection();
       conn.Open();
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"DELETE FROM items;";
+      cmd.CommandText = @"DELETE FROM places;";
       cmd.ExecuteNonQuery();
       conn.Close();
       if (conn != null)
